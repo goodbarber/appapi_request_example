@@ -10,35 +10,32 @@ body{
     background: linear-gradient(120deg, #155799, #159957);
 }
 
-.container{
-    margin-top: 90px;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
 .title{
+    position: absolute;
+    top: 36vh;
+    left: 50vw;
+    width: 100%;
+    transform: translateY(-50%) translateX(-50%);
     text-align: center;
-    font-size: 7vw;
+    font-size: 4vh;
     font-weight: bold;
     color: white;
-    margin-bottom: 12vw;
-    margin-top: -12vw;
 }
 
 .button-fact{
-    height: 11.5vw;
-    transform: translateY(-50%);
-    font-size: 4vw;
-    border-radius: 5px;
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    transform: translateY(-50%) translateX(-50%);
+    height: 7vh;
+    font-size: 2.2vh;
+    border-radius: 0.8vh;
     width: 90vw;
     display: flex;
     justify-content: center;
     align-items: center;
     border: #bedbd964 1px solid;
-    background-color: #b6d2d00f;
+    background-color: #b6d2d017;
     cursor: pointer;
     color: #BEDBD9;
     font-weight: 500;
@@ -50,15 +47,4 @@ body{
 
 .cat-emoji{
     transform: translateY(8px);
-}
-
-
-@media screen and (max-width: 768px){
-    .container{
-        margin-top: 0;
-    }
-
-    .title{
-        transform: translateY(-20px);
-    }
 }

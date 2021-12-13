@@ -13,8 +13,8 @@ const URL_CAT_FACT_ENDPOINT = new URL("/facts/random", URL_API).toString();
 
 
 /**
- * Callback gbRequestDidSuccess is called in case of a success of the HTTP request
- * message on an alert
+ * Callback gbRequestDidSuccess is called in case of a success of the HTTP request.
+ * Message on an alert
  * @param {*} tag A tag (integer) that identify the request 
  * @param {*} data The raw data of the resource
  * @param {*} src The pathway to the resource in the file system
@@ -32,8 +32,8 @@ function gbRequestDidSuccess(tag, data, src){
 
 
 /**
- * Callback gbRequestDidFail is called if the request fails
- * message on an alert
+ * Callback gbRequestDidFail is called if the request fails.
+ * Message on an alert
  * @param {*} tag A tag (integer) that identify the request 
  * @param {*} errorCode 0 if there is a network problem, the HTTP error code otherwise
  * @param {*} errorMessage A description of the problem leading to the request failure
@@ -61,22 +61,18 @@ function gbRequestDidFail(tag, errorCode, errorMessage){
  *  @param {*} postParams If method==POST, you can pass HTTP Post Params in your request
  */
 function buttonClick(resourceUrl, tag=0, cache="NO", requestMethod="GET", postParams={}){
-	gbRequest(resourceUrl, tag, cache, requestMethod, postParams);
+   gbRequest(resourceUrl, tag, cache, requestMethod, postParams);
 }
 
       </script>
    </head>
    <body>
-      <div class="container">
-         <div class="wrapper">
-            <div class="title">
-               <p>Daily cat facts!</p>
-               <p class="cat-emoji">🐱</p>
-            </div>
-            <div class="button-fact" onclick="buttonClick(URL_CAT_FACT_ENDPOINT)">
-               Get a new fact
-            </div>
-         </div>
+      <div class="title">
+         <p>Daily cat facts!</p>
+         <p class="cat-emoji">🐱</p>
+      </div>
+      <div class="button-fact" onclick="buttonClick(URL_CAT_FACT_ENDPOINT)">
+         Get a new fact
       </div>
    </body>
 </html>
