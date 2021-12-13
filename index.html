@@ -31,7 +31,6 @@
        */
       function gbRequestDidFail(tag, errorCode, errorMessage){
          gbAlert(`Cat Fact Error Code ${errorCode}`, errorMessage);
-         break;
       }
 
 
@@ -45,7 +44,7 @@
          const URL_API = "https://cat-fact.herokuapp.com";
          const URL_CAT_FACT_ENDPOINT = new URL("/facts/random", URL_API).toString();
          // The url of the resource to load
-         let ressourceUrl = URL_CAT_FACT_ENDPOINT;
+         let resourceUrl = URL_CAT_FACT_ENDPOINT;
          // A tag (integer) to identify the request
          let tag = 0;
          // cache YES if you want to use the app's cache mechanism, NO otherwise
