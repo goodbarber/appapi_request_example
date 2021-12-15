@@ -1,15 +1,10 @@
 plugin_request_example
-===========
+======================
 ## General Info
 ***
-This plugin is a demo GoodBarber plugin that show you how you can request external platform.
-To illustrate this, the plugin send a request to the [Cat Fact API](https://docs.woocommerce.com/document/woocommerce-rest-api/).
+This plugin shows you how you can send a request to an external API with a GoodBarber plugin.
+To illustrate this, when the user click on the button, the plugin send a request to the [Cat Fact API](https://docs.woocommerce.com/document/woocommerce-rest-api/).
 
-## Test the plugin
+## How to test this GoodBarber plugin
 ***
-1. First you need to recover the code 
-```
-$ git clone https://github.com/goodbarber/plugin_request_example.git
-```
-2. Then upload all the files in a Plugin section in your GoodBarber backend
-3. You will see a button that you can click for recover a message send by the external API
+You just need to upload all the files of this repo in a Plugin section in your GoodBarber backend.
