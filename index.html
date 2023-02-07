@@ -1,59 +1,41 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <title></title>
+      <title>Plugin request example</title>
       <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;display=swap" rel='stylesheet' type='text/css'>
       <link rel="stylesheet" href="./style.css" type="text/css" />
-      <script src="./GBJSTK.js"></script>
       <script type="text/javascript">
 
       /**
-       * Callback gbRequestDidSuccess is called in case of a success of the HTTP request.
-       * Message on an alert
-       * @param {*} tag A tag (integer) that identify the request 
-       * @param {*} data The raw data of the resource
-       * @param {*} src The pathway to the resource in the file system
-       */
-      function gbRequestDidSuccess(tag, data, src){
-         // By default, the request for cat fact API is identify with the tag 0
-         data = JSON.parse(decodeURIComponent(data));
-         gbAlert("Cat Fact", data.text);
-      }
-
-
-      /**
-       * Callback gbRequestDidFail is called if the request fails.
-       * Message on an alert
-       * @param {*} tag A tag (integer) that identify the request 
-       * @param {*} errorCode 0 if there is a network problem, the HTTP error code otherwise
-       * @param {*} errorMessage A description of the problem leading to the request failure
-       */
-      function gbRequestDidFail(tag, errorCode, errorMessage){
-         gbAlert(`Cat Fact Error Code ${errorCode}`, errorMessage);
-      }
-
-
-      /**
-       *  Call the gb request method that will retrieve cat fact data and open 
-       *  alert fill with the cat fact message (It's a demo function to
-       *  process an onclick event)
-       */
+      * Calls the `gb` request method to retrieve a random cat fact.
+      * The fact will be displayed in an alert window (this is just a demo function to show an example of processing an onclick event).
+      */
       function buttonClick(){
-         // Cat Fact API Example URL
+         // URL for the Cat Fact API
          const URL_API = "https://cat-fact.herokuapp.com";
          const URL_CAT_FACT_ENDPOINT = new URL("/facts/random", URL_API).toString();
-         // The url of the resource to load
+         // The URL of the resource to load
          let resourceUrl = URL_CAT_FACT_ENDPOINT;
-         // A tag (integer) to identify the request
-         let tag = 0;
-         // cache YES if you want to use the app's cache mechanism, NO otherwise
-         let cache = "NO";
-         // The HTTP method you want to use for the request
-         let requestMethod = "GET";
-         // If method==POST, you can pass HTTP Post Params in your request
-         let postParams = {};
-         gbRequest(resourceUrl, tag, cache, requestMethod, postParams);
+         // Using the `get` method from the `gb.request` interface
+         gb.request.get(resourceUrl, {
+            /**
+             * Callback function that is called if the request is successful.
+             * @param {*} data The raw data of the resource
+             */
+            success: (data) => {
+               gb.alert("Cat Fact", data.text);
+            },
+            /**
+             * Callback function that is called if the request fails.
+             * Displays an error message in an alert window.
+             * @param {*} errorCode 0 if there is a network problem, the HTTP error code otherwise
+             * @param {*} errorMessage A description of the problem that caused the request to fail
+             */
+            error: (errorCode, errorMessage) => {
+               gb.alert(`Cat Fact Error Code ${errorCode}`, errorMessage);
+            }
+         });
       }
 
       </script>
