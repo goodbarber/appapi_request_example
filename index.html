@@ -6,35 +6,29 @@
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;display=swap" rel='stylesheet' type='text/css'>
       <link rel="stylesheet" href="./style.css" type="text/css" />
       <script type="text/javascript">
+      // URL for the Cat Fact API
+      const URL_API = "https://cat-fact.herokuapp.com";
+      const URL_CAT_FACT_ENDPOINT = new URL("/facts/random", URL_API).toString();
 
       /**
       * Calls the `gb` request method to retrieve a random cat fact.
       * The fact will be displayed in an alert window (this is just a demo function to show an example of processing an onclick event).
       */
       function buttonClick(){
-         // URL for the Cat Fact API
-         const URL_API = "https://cat-fact.herokuapp.com";
-         const URL_CAT_FACT_ENDPOINT = new URL("/facts/random", URL_API).toString();
          // The URL of the resource to load
          let resourceUrl = URL_CAT_FACT_ENDPOINT;
+         // Callback function that is called if the request is successful.
+         let successCallback = (data) => {
+            gb.alert("Cat Fact", data.text);
+         }
+         // Callback function that is called if the request fails.
+         let errorCallback = (errorCode, errorMessage) => {
+            gb.alert(`Cat Fact Error Code ${errorCode}`, errorMessage);
+         }
          // Using the `get` method from the `gb.request` interface
          gb.request.get(resourceUrl, {
-            /**
-             * Callback function that is called if the request is successful.
-             * @param {*} data The raw data of the resource
-             */
-            success: (data) => {
-               gb.alert("Cat Fact", data.text);
-            },
-            /**
-             * Callback function that is called if the request fails.
-             * Displays an error message in an alert window.
-             * @param {*} errorCode 0 if there is a network problem, the HTTP error code otherwise
-             * @param {*} errorMessage A description of the problem that caused the request to fail
-             */
-            error: (errorCode, errorMessage) => {
-               gb.alert(`Cat Fact Error Code ${errorCode}`, errorMessage);
-            }
+            success: successCallback,
+            error: errorCallback
          });
       }
 
