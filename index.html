@@ -1,70 +1,70 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <title></title>
-      <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-      <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;display=swap" rel='stylesheet' type='text/css'>
-      <link rel="stylesheet" href="./style.css" type="text/css" />
-      <script src="./GBJSTK.js"></script>
-      <script type="text/javascript">
+	<head>
+		<title></title>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;display=swap" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="./style.css" type="text/css" />
+		<script src="./GBJSTK.js"></script>
+		<script type="text/javascript">
+			/**
+			 *  Call the js request method that will retrieve cat fact data and open
+			 *  alert fill with the cat fact message (It's a demo function to
+			 *  process an onclick event)
+			 */
+			function fetchRequest(url = "", data = {}) {
+				const requestOptions = {
+					// *GET, POST, PUT, DELETE, etc.
+					method: "GET",
+					// *default, no-cache, reload, force-cache, only-if-cached
+					cache: "no-cache",
+					headers: {
+						"Content-Type": "application/json",
+					},
+				};
 
-      /**
-       * Callback gbRequestDidSuccess is called in case of a success of the HTTP request.
-       * Message on an alert
-       * @param {*} tag A tag (integer) that identify the request 
-       * @param {*} data The raw data of the resource
-       * @param {*} src The pathway to the resource in the file system
-       */
-      function gbRequestDidSuccess(tag, data, src){
-         // By default, the request for cat fact API is identify with the tag 0
-         data = JSON.parse(decodeURIComponent(data));
-         gbAlert("Cat Fact", data.text);
-      }
+				if (data.length === 0) {
+					// body data type must match "Content-Type" header
+					requestOptions.body = JSON.stringify(data);
+				}
 
+				fetch(url, requestOptions)
+					.then((response) => {
+						if (!response.ok) {
+							throw new Error(`Request error: ${response.status} - ${response.statusText}`);
+						}
+						return response.json();
+					})
+					.then((data) => {
+						gbAlert("Cat Fact", data.text);
+					})
+					.catch((error) => {
+						gbAlert(`Cat Fact Error Code ${error.name}`, error.message);
+					});
+			}
 
-      /**
-       * Callback gbRequestDidFail is called if the request fails.
-       * Message on an alert
-       * @param {*} tag A tag (integer) that identify the request 
-       * @param {*} errorCode 0 if there is a network problem, the HTTP error code otherwise
-       * @param {*} errorMessage A description of the problem leading to the request failure
-       */
-      function gbRequestDidFail(tag, errorCode, errorMessage){
-         gbAlert(`Cat Fact Error Code ${errorCode}`, errorMessage);
-      }
-
-
-      /**
-       *  Call the gb request method that will retrieve cat fact data and open 
-       *  alert fill with the cat fact message (It's a demo function to
-       *  process an onclick event)
-       */
-      function buttonClick(){
-         // Cat Fact API Example URL
-         const URL_API = "https://cat-fact.herokuapp.com";
-         const URL_CAT_FACT_ENDPOINT = new URL("/facts/random", URL_API).toString();
-         // The url of the resource to load
-         let resourceUrl = URL_CAT_FACT_ENDPOINT;
-         // A tag (integer) to identify the request
-         let tag = 0;
-         // cache YES if you want to use the app's cache mechanism, NO otherwise
-         let cache = "NO";
-         // The HTTP method you want to use for the request
-         let requestMethod = "GET";
-         // If method==POST, you can pass HTTP Post Params in your request
-         let postParams = {};
-         gbRequest(resourceUrl, tag, cache, requestMethod, postParams);
-      }
-
-      </script>
-   </head>
-   <body>
-      <div class="title">
-         <p>Daily cat facts!</p>
-         <p class="cat-emoji">🐱</p>
-      </div>
-      <div class="button-fact" onclick="buttonClick()">
-         Get a new fact
-      </div>
-   </body>
+			/**
+			 *  Call the gb request method that will retrieve cat fact data and open
+			 *  alert fill with the cat fact message (It's a demo function to
+			 *  process an onclick event)
+			 */
+			function buttonClick() {
+				// Cat Fact API Example URL
+				const URL_API = "https://cat-fact.herokuapp.com";
+				const URL_CAT_FACT_ENDPOINT = new URL("/facts/random", URL_API).toString();
+				// The url of the resource to load
+				let resourceUrl = URL_CAT_FACT_ENDPOINT;
+				// If method==POST, you can pass HTTP Post Params in your request
+				let postParams = {};
+				fetchRequest(resourceUrl, postParams);
+			}
+		</script>
+	</head>
+	<body>
+		<div class="title">
+			<p>Daily cat facts!</p>
+			<p class="cat-emoji">🐱</p>
+		</div>
+		<div class="button-fact" onclick="buttonClick()">Get a new fact</div>
+	</body>
 </html>
